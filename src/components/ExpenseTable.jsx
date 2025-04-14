@@ -1,28 +1,28 @@
-export default function ExpenseTable({ expenses, searchTerm }) {
-    const filteredExpenses = expenses.filter(
-      (expense) =>
-        expense.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        expense.category.toLowerCase().includes(searchTerm.toLowerCase())
-    );
-  
-    return (
-      <table>
-        <thead>
-          <tr>
-            <th>Description</th>
-            <th>Amount ($)</th>
-            <th>Category</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filteredExpenses.map((expense) => (
-            <tr key={expense.id}>
-              <td>{expense.description}</td>
-              <td>{expense.amount}</td>
-              <td>{expense.category}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    );
+import './ExpenseTable.css';
+
+export default function ExpenseTable({ expenses }) {
+  if (expenses.length === 0) {
+    return <p className="no-expenses">No expenses to show</p>;
   }
+
+  return (
+    <table className="expense-table">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Amount</th>
+          <th>Category</th>
+        </tr>
+      </thead>
+      <tbody>
+        {expenses.map(exp => (
+          <tr key={exp.id}>
+            <td>{exp.description}</td>
+            <td>${exp.amount.toFixed(2)}</td>
+            <td>{exp.category}</td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  );
+}

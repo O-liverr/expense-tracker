@@ -1,10 +1,15 @@
-export default function SearchBar({ searchTerm, setSearchTerm }) {
-    return (
+import './SearchBar.css';
+
+export default function SearchBar({ value, onChange }) {
+  return (
+    <div className="search-container">
       <input
         type="text"
         placeholder="Search expenses..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
+        className="search-input"
       />
-    );
-  }
+    </div>
+  );
+}
